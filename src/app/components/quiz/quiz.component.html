@@ -1,0 +1,30 @@
+<ng-container 
+  *ngrxLet="{quizQuestions: quizQuestions$ | async, 
+    answeredQuestions: answeredQuestions$ | async, 
+    correctAnsweres: correctAnsweres$ | async, 
+    currentQuestionIndex: currentQuestionIndex$ | async,
+    isAllAnswered: isAllAnswered$ | async,
+    isQuizFinished: isQuizFinished$ | async,
+    quizType: quizType$ | async} as data"
+>
+  <div *ngIf="data.quizType">{{data.quizType | titlecase}} Quiz</div>
+  <ng-container *ngIf="!data.isQuizFinished">
+    <div *ngFor="let question of data.quizQuestions; let i = index">
+      <div *ngIf="data.currentQuestionIndex === i">
+        <div class="question" [innerHTML]="question.question"></div>
+        <app-quiz-answers 
+          [incorrectAnswers]="question.incorrectAnswers" 
+          [correctAnswer]="question.correctAnswer"
+          (answer)="onAnswer($event, question, i, data.quizType)"
+          >
+        </app-quiz-answers>
+        <button *ngIf="!data.isAllAnswered && data.answeredQuestions?.includes(i)" (click)="onNextQuestion()">Next</button>
+        <button *ngIf="data.isAllAnswered" (click)="onFinish()">Finish</button>
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="data.isQuizFinished && data.correctAnsweres && data.quizQuestions">
+    Quiz finished
+    <div>Score: {{data.correctAnsweres.length}}/{{data.quizQuestions.length}}</div>
+  </div>
+</ng-container>

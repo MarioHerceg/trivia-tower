@@ -1,0 +1,28 @@
+<p-table 
+    [value]="(stats$ | async) ?? []" 
+    [tableStyle]="{'min-width': '60rem'}" 
+    [scrollable]="true"
+    [scrollHeight]="'flex'"
+    class="table"
+>
+  <ng-template pTemplate="header">
+      <tr>
+          <th pSortableColumn="category" style="width:20%">
+              Category <p-sortIcon field="category" />
+          </th>
+          <th pSortableColumn="basicPerc" style="width:20%">
+              Basic percentage <p-sortIcon field="basicPerc" />
+          </th>
+          <th pSortableColumn="weightedPerc" style="width:20%">
+              Weighted percentage <p-sortIcon field="weightedPerc" />
+          </th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+      <tr>
+          <td>{{ product.category }}</td>
+          <td>{{ product.basicPerc }}</td>
+          <td>{{ product.weightedPerc }}</td>
+      </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,15 @@
+.clickable {
+  cursor: pointer;
+  
+  &:hover {
+    background-color: orange;
+  }
+}
+
+.correct {
+  background-color: green;
+}
+
+.incorrect {
+  background-color: red;
+}

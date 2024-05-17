@@ -1,0 +1,12 @@
+<ng-container *ngrxLet="{answeredQuestion: answeredQuestion$ | async, correctAnswer: correctAnswer$ | async} as data">
+  <div *ngFor="let answer of randomizedAnswers$ | async">
+    <div 
+      [innerHTML]="answer" 
+      (click)="data.answeredQuestion ? null : onAnswerClick(answer)" 
+      [ngClass]="{'correct': data.answeredQuestion && answer === data.correctAnswer, 
+                  'incorrect': data.answeredQuestion === answer && data.answeredQuestion !== data.correctAnswer,
+                  'clickable': !data.answeredQuestion}"
+    >
+    </div>
+  </div>
+</ng-container>

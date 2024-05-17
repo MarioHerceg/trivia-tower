@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.quiz-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+
+  &-card {
+    width: 50%;
+  }
+}
