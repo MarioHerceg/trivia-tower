@@ -1,16 +1,16 @@
 <ng-container *ngIf="step$ | async as step">
-  <div *ngIf="step === TriviaStep.HOME">
-    <p-button (click)="goToStats()" label="Check your stats" autoWidth="false" [style]="{'width':'fit-content'}"/>
+  <ng-container *ngIf="step === TriviaStep.HOME">
     <div class="quiz-cards">
       <app-quiz-card class="quiz-cards-card" [quizType]="QuizType.CLASSIC" (startQuiz)="onStartQuiz($event, QuizType.CLASSIC)"></app-quiz-card>
       <app-quiz-card class="quiz-cards-card" [quizType]="QuizType.ENDLESS" (startQuiz)="onStartQuiz($event, QuizType.ENDLESS)"></app-quiz-card>
     </div>
-  </div>
+  </ng-container>
   <app-quiz 
     *ngIf="step === TriviaStep.QUIZ" 
     [quizQuestion]="questions$ | async" 
     [quizType]="(quizType$ | async) ?? QuizType.CLASSIC"
     (getMoreQuestions)="onGetMoreQuestions()"
+    (restart)="onRestart()"
     >
   </app-quiz>
 </ng-container>

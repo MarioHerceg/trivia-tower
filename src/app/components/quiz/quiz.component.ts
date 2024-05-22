@@ -29,6 +29,7 @@ export class QuizComponent {
     this.quizType_.next(value);
   }
   @Output() getMoreQuestions = new EventEmitter<void>();
+  @Output() restart = new EventEmitter<void>();
 
   private readonly currentQuestionIndex_ = new BehaviorSubject<number>(0);
   currentQuestionIndex$ = this.currentQuestionIndex_.asObservable();
@@ -41,6 +42,8 @@ export class QuizComponent {
 
   private readonly isQuizFinished_ = new BehaviorSubject<boolean>(false);
   isQuizFinished$ = this.isQuizFinished_.asObservable();
+
+  QuizType = QuizType;
 
   isAllAnswered$ = combineLatest([
     this.quizQuestions$,
@@ -102,5 +105,9 @@ export class QuizComponent {
 
   onFinish() {
     this.isQuizFinished_.next(true);
+  }
+
+  onTryAgain() {
+    this.restart.emit();
   }
 }

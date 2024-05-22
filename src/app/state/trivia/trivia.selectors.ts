@@ -14,3 +14,8 @@ export const selectAnsweredQuestions = createSelector(
   selectTriviaState,
   (state: ITriviaState) => state.answeredQuestions,
 );
+
+export const selectResetSessionTokenState = createSelector(
+  selectTriviaState,
+  (state: ITriviaState) => state.resetSessionTokenState,
+);

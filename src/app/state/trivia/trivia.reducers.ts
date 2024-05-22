@@ -1,7 +1,7 @@
 import { DEFAULT_SUMMARY_STATE, ITriviaState } from './trivia.models';
 import { Action, createReducer, on } from '@ngrx/store';
 import { TriviaActions } from '.';
-import { toAsyncFailedStatus } from '../../models/async-status.model';
+import { toAsyncFailedStatus, toAsyncLoadedStatus } from '../../models/async-status.model';
 
 const _triviaReducers = createReducer(
   DEFAULT_SUMMARY_STATE,
@@ -24,6 +24,7 @@ const _triviaReducers = createReducer(
     return {
       ...state,
       sessionToken: token,
+      getSessionTokenState: toAsyncLoadedStatus(),
     };
   }),
 
@@ -38,6 +39,21 @@ const _triviaReducers = createReducer(
     return {
       ...state,
       answeredQuestions: [...state.answeredQuestions, answeredQuestion],
+    };
+  }),
+
+  on(TriviaActions.resetSessionTokenSuccess, (state, { token }): ITriviaState => {
+    return {
+      ...state,
+      sessionToken: token,
+      resetSessionTokenState: toAsyncLoadedStatus(),
+    };
+  }),
+
+  on(TriviaActions.resetSessionTokenFailure, (state, { errorMessage }): ITriviaState => {
+    return {
+      ...state,
+      resetSessionTokenState: toAsyncFailedStatus(errorMessage),
     };
   }),
 );

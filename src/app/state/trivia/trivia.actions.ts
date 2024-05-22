@@ -26,3 +26,15 @@ export const addAnsweredQuestion = createAction(
   '[Trivia] Add Answered Question',
   props<{ answeredQuestion: IQuestionAnswered }>(),
 );
+
+export const resetSessionToken = createAction('[Trivia] Reset Session Token', props<{ token: string }>());
+
+export const resetSessionTokenSuccess = createAction(
+  '[Trivia] Reset Session Token Success',
+  props<{ token: string }>(),
+);
+
+export const resetSessionTokenFailure = createAction(
+  '[Trivia] Reset Session Token Failure',
+  props<{ errorMessage: string }>(),
+);

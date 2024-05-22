@@ -2,16 +2,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  flex: 1;
 }
 
 .quiz-cards {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 2rem;
 
   &-card {
     width: 50%;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .quiz-cards {
+    flex-direction: row;
   }
 }

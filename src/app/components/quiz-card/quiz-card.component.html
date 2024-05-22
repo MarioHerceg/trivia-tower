@@ -16,13 +16,5 @@
     [options]="difficulties"
     autoWidth="false" [style]="{'width':'100%'}"
   />
-
-  <label for="type">Type: </label>
-  <p-dropdown 
-    id="type"
-    formControlName="type" 
-    [options]="types"
-    autoWidth="false" [style]="{'width':'100%'}"
-  />
-  <p-button (click)="onStartQuiz()" label="Start quiz" autoWidth="false" [style]="{'width':'fit-content'}"/>
+  <p-button (click)="onStartQuiz()" label="Start quiz" autoWidth="false" [style]="{'width':'fit-content'}" class="action-button"/>
 </form>

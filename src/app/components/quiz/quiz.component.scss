@@ -1,11 +1,56 @@
 :host {
-  width: fit-content;
+  width: 50%;
   margin: auto;
   border: 1px solid gray;
   border-radius: 4px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.info {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  display: flex;
+  justify-content: space-between;
 }
 
 .question {
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+  
+  &-title {
+    margin-bottom: 1rem;
+  }
+
+  &-answers {
+    flex: 1;
+  }
+}
+
+.buttons {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  .action-button {
+    margin-top: auto;
+    width: fit-content;
+    align-self: flex-end;
+  }
+}
+
+.end {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }

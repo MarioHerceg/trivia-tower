@@ -4,7 +4,8 @@ import { AppState } from '../../state';
 import { IQuestionAnswered, TriviaSelectors } from '../../state/trivia';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, map } from 'rxjs';
-import { QuestionDifficulty, QuestionType } from '../../models/api.model';
+import { QuestionDifficulty, QuestionType } from '../../models/trivia.model';
+import _ from 'lodash';
 
 type IQuestionsByCategory = Record<string, IQuestionAnswered[]>;
 
@@ -84,7 +85,7 @@ export class StatsComponent {
   );
 
   stats$ = this.statsByCategory$.pipe(
-    map((stats) => Object.entries(stats).map(([category, value]) => ({ category, ...value }))),
+    map((stats) => Object.entries(stats).map(([category, value]) => ({ category: _.unescape(category), ...value }))),
   );
 
   constructor(private readonly store: Store<AppState>) {

@@ -9,6 +9,16 @@ export interface IResponseCategories {
   trivia_categories: ITriviaCategory[];
 }
 
+export interface IResponseQuestionCountsByCategory {
+  category_id: number;
+  category_question_count: {
+    total_question_count: number;
+    total_easy_question_count: number;
+    total_medium_question_count: number;
+    total_hard_question_count: number;
+  };
+}
+
 export type IResponseToken = IResponseBase & { token: string };
 
 export interface IQuestionsRequest {
@@ -16,7 +26,6 @@ export interface IQuestionsRequest {
   token: string;
   category: number;
   difficulty: QuestionDifficulty;
-  type: QuestionType;
 }
 
 export enum QuestionDifficulty {

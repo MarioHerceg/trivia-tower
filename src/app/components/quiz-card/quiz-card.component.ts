@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DEFAULT_CATEGORY, ITriviaCategory, TriviaSelectors } from '../../state/trivia';
-import { IQuestionsRequest, QuestionDifficulty, QuestionType } from '../../models/api.model';
+import { IQuestionsRequest, QuestionDifficulty } from '../../models/trivia.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state';
 import { QuizType } from '../home/trivia.store';
@@ -9,7 +9,6 @@ import { QuizType } from '../home/trivia.store';
 export interface IQuizForm {
   category: FormControl<ITriviaCategory>;
   difficulty: FormControl<QuestionDifficulty>;
-  type: FormControl<QuestionType>;
 }
 
 @Component({
@@ -27,11 +26,9 @@ export class QuizCardComponent {
   quizForm = new FormGroup<IQuizForm>({
     category: new FormControl(DEFAULT_CATEGORY, { nonNullable: true }),
     difficulty: new FormControl(QuestionDifficulty.ANY, { nonNullable: true }),
-    type: new FormControl(QuestionType.ANY, { nonNullable: true }),
   });
 
   difficulties = Object.values(QuestionDifficulty);
-  types = Object.values(QuestionType);
 
   constructor(private readonly store: Store<AppState>) {}
 
@@ -47,7 +44,6 @@ export class QuizCardComponent {
         quizFormValue.difficulty && quizFormValue.difficulty !== QuestionDifficulty.ANY
           ? quizFormValue.difficulty
           : undefined,
-      type: quizFormValue.type && quizFormValue.type !== QuestionType.ANY ? quizFormValue.type : undefined,
     });
   }
 }

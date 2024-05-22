@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding: 0.2rem 2rem;
+  font-size: 1.25rem;
+  background-color: var(--surface-border);
+}
+
+.logo {
+  background-color: var(--primary-color);
+  display: flex;
+  padding: 0.3rem 0 0.3rem 0.3rem;
+  border-radius: 4px;
+
+  img {
+    width: 7rem;
+  }
+}
+
+.links {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+
+  &-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: border-bottom 0.2s ease-in-out;
+  
+    &.active {
+      border-bottom: 1px solid var(--text-color);
+    }
+
+    &:hover {
+      border-bottom: 1px solid var(--text-color);
+    }
+  }
+}
+
+.theme {
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  padding: 0.2rem;
+  cursor: pointer;
+  transition: padding 0.1s ease-in-out;
+
+  &:hover {
+    padding: 0.25rem;
+  }
+}

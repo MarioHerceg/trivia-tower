@@ -1,0 +1,19 @@
+<div class="logo">
+    <img src="assets/img/logo.svg">
+</div>
+<div class="links">
+  <a 
+    *ngFor="let route of routePaths" 
+    class="links-link" 
+    [routerLink]="'/' + route"
+    [ngClass]="{'active': (currentRoute$ | async) === route}"
+    >
+      {{route | titlecase}}
+  </a>
+</div>
+
+<div 
+  class="theme pi" 
+  [ngClass]="{'pi-sun': appTheme.value === AppTheme.LIGHT, 'pi-moon': appTheme.value === AppTheme.DARK}" 
+  (click)="changeTheme(appTheme.value)">
+</div>

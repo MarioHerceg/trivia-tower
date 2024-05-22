@@ -20,9 +20,20 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StatsComponent } from './components/stats/stats.component';
 import { TableModule } from 'primeng/table';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuizCardComponent, QuizComponent, QuizAnswersComponent, StatsComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    QuizCardComponent,
+    QuizComponent,
+    QuizAnswersComponent,
+    StatsComponent,
+    NavbarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +43,8 @@ import { TableModule } from 'primeng/table';
     DropdownModule,
     ButtonModule,
     TableModule,
+    TabMenuModule,
+    ToastModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers: metaReducers }),
     EffectsModule.forRoot([TriviaEffects]),

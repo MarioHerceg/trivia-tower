@@ -3,13 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { StatsComponent } from './components/stats/stats.component';
 import { HomeComponent } from './components/home/home.component';
 
+export enum RoutePath {
+  HOME = 'home',
+  STATS = 'stats',
+}
+
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: RoutePath.HOME, pathMatch: 'full' },
   {
-    path: 'home',
+    path: RoutePath.HOME,
     component: HomeComponent,
   },
-  { path: 'stats', component: StatsComponent },
+  { path: RoutePath.STATS, component: StatsComponent },
 ];
 
 @NgModule({

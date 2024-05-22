@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  height: 100%;
 }
 
 .table {
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   padding: 0.1rem;
-  height: 80vh;
+  height: 100%;
 }

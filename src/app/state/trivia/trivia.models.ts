@@ -7,6 +7,7 @@ export interface ITriviaState {
   sessionToken: string | null;
   getSessionTokenState: IAsyncStatus;
   answeredQuestions: IQuestionAnswered[];
+  resetSessionTokenState: IAsyncStatus;
 }
 
 export const DEFAULT_SUMMARY_STATE: ITriviaState = {
@@ -15,6 +16,7 @@ export const DEFAULT_SUMMARY_STATE: ITriviaState = {
   sessionToken: null,
   getSessionTokenState: toAsyncInitStatus(),
   answeredQuestions: [],
+  resetSessionTokenState: toAsyncInitStatus(),
 };
 
 export interface ITriviaCategory {

@@ -7,24 +7,31 @@
     isQuizFinished: isQuizFinished$ | async,
     quizType: quizType$ | async} as data"
 >
-  <div *ngIf="data.quizType">{{data.quizType | titlecase}} Quiz</div>
+  <div *ngIf="data.quizType" class="info">
+    <div>{{data.quizType | uppercase}} QUIZ</div>
+    <div>Score: {{data.correctAnsweres?.length ?? 0}}<span *ngIf="data.quizType === QuizType.CLASSIC">/{{data.quizQuestions?.length ?? 0}}</span></div>
+  </div>
   <ng-container *ngIf="!data.isQuizFinished">
-    <div *ngFor="let question of data.quizQuestions; let i = index">
-      <div *ngIf="data.currentQuestionIndex === i">
-        <div class="question" [innerHTML]="question.question"></div>
+    <ng-container *ngFor="let question of data.quizQuestions; let i = index">
+      <div *ngIf="data.currentQuestionIndex === i" class="question">
+        <h4 class="question-title" [innerHTML]="question.question"></h4>
         <app-quiz-answers 
+          class="question-answers"
           [incorrectAnswers]="question.incorrectAnswers" 
           [correctAnswer]="question.correctAnswer"
           (answer)="onAnswer($event, question, i, data.quizType)"
           >
         </app-quiz-answers>
-        <button *ngIf="!data.isAllAnswered && data.answeredQuestions?.includes(i)" (click)="onNextQuestion()">Next</button>
-        <button *ngIf="data.isAllAnswered" (click)="onFinish()">Finish</button>
+        <div class="buttons">
+          <p-button *ngIf="!data.isAllAnswered && data.answeredQuestions?.includes(i)" class="action-button" (click)="onNextQuestion()">Next</p-button>
+          <p-button *ngIf="data.isAllAnswered" class="action-button" (click)="onFinish()">Finish</p-button>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
-  <div *ngIf="data.isQuizFinished && data.correctAnsweres && data.quizQuestions">
-    Quiz finished
-    <div>Score: {{data.correctAnsweres.length}}/{{data.quizQuestions.length}}</div>
+  <div *ngIf="data.isQuizFinished && data.correctAnsweres && data.quizQuestions" class="end">
+    <h2>Quiz finished</h2>
+    <div>Score: {{data.correctAnsweres.length}}<span *ngIf="data.quizType === QuizType.CLASSIC">/{{data.quizQuestions.length}}</span></div>
+    <p-button (click)="onTryAgain()">Try again</p-button>
   </div>
 </ng-container>

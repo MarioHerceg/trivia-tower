@@ -38,4 +38,18 @@ export class TriviaEffects {
       ),
     ),
   );
+
+  resetSessionToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TriviaActions.resetSessionToken),
+      switchMap((payload) =>
+        from(this.api.resetSessionToken(payload.token)).pipe(
+          map((response) => {
+            return TriviaActions.resetSessionTokenSuccess({ token: response.token });
+          }),
+          catchError((error) => of(TriviaActions.resetSessionTokenFailure({ errorMessage: error.message }))),
+        ),
+      ),
+    ),
+  );
 }

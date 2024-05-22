@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { IQuestionsRequest, IResponseCategories, IResponseQuestions, IResponseToken } from '../models/api.model';
+import {
+  IQuestionsRequest,
+  IResponseCategories,
+  IResponseQuestionCountsByCategory,
+  IResponseQuestions,
+  IResponseToken,
+} from '../models/trivia.model';
 
 @Injectable()
 export class ApiService {
@@ -11,23 +17,27 @@ export class ApiService {
     return this.http.get<IResponseToken>('https://opentdb.com/api_token.php?command=request');
   }
 
+  resetSessionToken(token: string) {
+    return this.http.get<any>(`https://opentdb.com/api_token.php?command=reset&token=${token}`);
+  }
+
   getCategories() {
     return this.http
       .get<IResponseCategories>('https://opentdb.com/api_category.php')
       .pipe(map((response) => response.trivia_categories));
   }
 
+  getQuestionCountsByCategory(categoryId: number) {
+    return this.http.get<IResponseQuestionCountsByCategory>(`https://opentdb.com/api_count.php?category=${categoryId}`);
+  }
+
   getQuestions(request: Partial<IQuestionsRequest>) {
     let apiCall = `https://opentdb.com/api.php?amount=${request.ammount}`;
-    console.log(request);
     if (request.category) {
       apiCall += `&category=${request.category}`;
     }
     if (request.difficulty) {
       apiCall += `&difficulty=${request.difficulty}`;
-    }
-    if (request.type) {
-      apiCall += `&type=${request.type}`;
     }
     if (request.token) {
       apiCall += `&token=${request.token}`;
