@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid transparent;
+  border: 1px solid var(--surface-border);
   border-radius: 4px;
   transition: border 0.1s ease-in; 
 

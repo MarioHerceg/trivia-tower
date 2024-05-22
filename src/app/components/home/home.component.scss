@@ -12,12 +12,16 @@
   gap: 2rem;
 
   &-card {
-    width: 50%;
+    width: 100%;
   }
 }
 
 @media screen and (min-width: 880px) {
   .quiz-cards {
     flex-direction: row;
+
+    &-card {
+      width: 50%;
+    }
   }
 }
