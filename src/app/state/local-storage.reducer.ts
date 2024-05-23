@@ -15,7 +15,6 @@ export const localStorageMetaReducer = (reducer: ActionReducer<AppState>): Actio
       }
     }
     const nextState = reducer(state, action);
-    // This saves current state into local storage, excluding auth state, logs, and all of query except currentQuery
     localStorage.setItem('state', JSON.stringify(nextState));
 
     return nextState;

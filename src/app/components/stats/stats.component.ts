@@ -1,17 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state';
-import { IQuestionAnswered, TriviaSelectors } from '../../state/trivia';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest, map } from 'rxjs';
+import { map } from 'rxjs';
 import { QuestionDifficulty, QuestionType } from '../../models/trivia.model';
 import _ from 'lodash';
+import { IQuestionAnswered } from '../../state/trivia/trivia.models';
+import { TriviaSelectors } from '../../state/trivia';
 
 type IQuestionsByCategory = Record<string, IQuestionAnswered[]>;
 
 interface IStat {
   basicPerc: number;
   weightedPerc: number;
+  correctQuestionsCount: number;
+  totalQuestionsCount: number;
 }
 
 interface IStatByCategory {
@@ -78,6 +80,8 @@ export class StatsComponent {
         statsByCategory[category] = {
           basicPerc: Math.round((correctAnswers.length / questionsByCategory[category].length) * 100),
           weightedPerc: weightedAnsweresSize > 0 ? Math.round((correctAnsweresSize / weightedAnsweresSize) * 100) : 0,
+          totalQuestionsCount: questionsByCategory[category].length,
+          correctQuestionsCount: correctAnswers.length,
         };
       }
       return statsByCategory;
@@ -88,13 +92,7 @@ export class StatsComponent {
     map((stats) => Object.entries(stats).map(([category, value]) => ({ category: _.unescape(category), ...value }))),
   );
 
-  constructor(private readonly store: Store<AppState>) {
-    combineLatest([this.answeredQuestions$, this.questionsByCategory$, this.statsByCategory$])
-      .pipe(takeUntilDestroyed())
-      .subscribe(([answeredQuestions, questionsByCategory, statsByCategory]) => {
-        console.log(answeredQuestions, questionsByCategory, statsByCategory);
-      });
-  }
+  constructor(private readonly store: Store<AppState>) {}
 }
 
 const getQuestionWeight = (question: IQuestionAnswered) => {

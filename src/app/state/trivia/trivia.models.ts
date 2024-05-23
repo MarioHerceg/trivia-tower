@@ -1,5 +1,5 @@
-import { IQuestion } from '../../components/home/trivia.store';
 import { IAsyncStatus, toAsyncInitStatus } from '../../models/async-status.model';
+import { IQuestion } from '../../models/trivia.model';
 
 export interface ITriviaState {
   categories: ITriviaCategory[];

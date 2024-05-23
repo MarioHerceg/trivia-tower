@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DEFAULT_CATEGORY, ITriviaCategory, TriviaSelectors } from '../../state/trivia';
-import { IQuestionsRequest, QuestionDifficulty } from '../../models/trivia.model';
+import { IQuestionsRequest, QuestionDifficulty, QuizType } from '../../models/trivia.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state';
-import { QuizType } from '../home/trivia.store';
 
 export interface IQuizForm {
   category: FormControl<ITriviaCategory>;
@@ -34,7 +33,6 @@ export class QuizCardComponent {
 
   onStartQuiz() {
     const quizFormValue = this.quizForm.value;
-    console.log(quizFormValue);
     this.startQuiz.emit({
       category:
         quizFormValue.category && quizFormValue.category.id !== DEFAULT_CATEGORY.id

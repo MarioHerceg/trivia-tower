@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
-import { IQuestion } from '../home/trivia.store';
 import _ from 'lodash';
 import { filterNullish } from '../../utils/filter-nullish';
+import { IQuestion } from '../../models/trivia.model';
 
 @Component({
   selector: 'app-quiz-answers',
@@ -15,7 +15,6 @@ export class QuizAnswersComponent {
   incorrectAnswers$ = this.incorrectAnswers_.pipe(filterNullish());
   @Input() set incorrectAnswers(value: IQuestion['incorrectAnswers'] | null | undefined) {
     if (value) {
-      console.log(value);
       this.incorrectAnswers_.next(value);
     }
   }
@@ -24,7 +23,6 @@ export class QuizAnswersComponent {
   correctAnswer$ = this.correctAnswer_.pipe(filterNullish());
   @Input() set correctAnswer(value: IQuestion['correctAnswer'] | null | undefined) {
     if (value) {
-      console.log(value);
       this.correctAnswer_.next(value);
     }
   }

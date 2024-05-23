@@ -27,7 +27,6 @@ export class NavbarComponent {
   appTheme = new FormControl<AppTheme>(AppTheme.LIGHT, { nonNullable: true });
 
   constructor(private router: Router) {
-    console.log(this.routePaths);
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.currentRoute_.next(val.url.split('/')[1] as RoutePath);

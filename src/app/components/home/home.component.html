@@ -1,5 +1,27 @@
 <ng-container *ngIf="step$ | async as step">
   <ng-container *ngIf="step === TriviaStep.HOME">
+    <div class="title">Welcome to Trivia Tower!</div>
+    <div class="description"> Are you ready to challenge your knowledge and climb to the top? Trivia Tower offers a fun and engaging way to test what you know across various topics. Whether you're a trivia novice or a seasoned expert, there's a quiz for you!</div>
+
+    <h3>How It Works</h3>
+    <div class="description">Choose from two exciting quiz types:</div>
+    <ul>
+      <li>Normal Quiz: Answer 10 questions and see how high you score!</li>
+      <li>Endless Quiz: Keep answering until you get one wrong. How long can you last?</li>
+    </ul>
+
+    <h3>Customize Your Quiz</h3>
+    <div class="description">Select your preferred category and difficulty level to tailor the experience to your liking. With a wide range of topics and varying levels of challenge, there’s always something new to learn and enjoy.</div>
+    <br>
+
+    <h3>Track Your Progress</h3>
+    <div class="description">Keep an eye on your stats to see how you perform in each category. Whether you're brushing up on your knowledge or mastering new subjects, your stats will show you how far you've come.</div>
+    <br>
+
+    <h3>Ready to start?</h3>
+    <div class="description">Choose from the two quiz types below to get started!</div>
+    <br>
+
     <div class="quiz-cards">
       <app-quiz-card class="quiz-cards-card" [quizType]="QuizType.CLASSIC" (startQuiz)="onStartQuiz($event, QuizType.CLASSIC)"></app-quiz-card>
       <app-quiz-card class="quiz-cards-card" [quizType]="QuizType.ENDLESS" (startQuiz)="onStartQuiz($event, QuizType.ENDLESS)"></app-quiz-card>

@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { BehaviorSubject, Subject, combineLatest, filter, map, shareReplay, withLatestFrom } from 'rxjs';
-import { IQuestion, QuizType } from '../home/trivia.store';
 import { filterNullish } from '../../utils/filter-nullish';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TriviaActions } from '../../state/trivia';
+import { IQuestion, QuizType } from '../../models/trivia.model';
 
 @Component({
   selector: 'app-quiz',
@@ -18,7 +18,6 @@ export class QuizComponent {
   quizQuestions$ = this.quizQuestions_.pipe(filterNullish(), shareReplay());
   @Input() set quizQuestion(value: IQuestion[] | null | undefined) {
     if (value) {
-      console.log(value);
       this.quizQuestions_.next(value);
     }
   }

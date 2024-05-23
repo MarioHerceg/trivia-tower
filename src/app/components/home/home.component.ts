@@ -1,8 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ITriviaCategory, TriviaSelectors } from '../../state/trivia';
-import { GetQuestionsType, IQuestionsRequest, QuizType, TriviaStep, TriviaStore } from './trivia.store';
+import { TriviaStore } from '../../state/trivia.store';
 import { FormControl } from '@angular/forms';
-import { QuestionDifficulty, QuestionType } from '../../models/trivia.model';
+import {
+  GetQuestionsType,
+  IQuestionsRequest,
+  QuestionDifficulty,
+  QuestionType,
+  QuizType,
+  TriviaStep,
+} from '../../models/trivia.model';
 import { BehaviorSubject, Subject, withLatestFrom } from 'rxjs';
 import { filterNullish } from '../../utils/filter-nullish';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

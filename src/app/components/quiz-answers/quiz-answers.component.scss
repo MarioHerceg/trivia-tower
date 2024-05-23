@@ -18,15 +18,15 @@
     cursor: pointer;
     
     &:hover {
-      border: 1px solid var(--orange-400);
+      border: 1px solid var(--primary-color);
     }
   }
 
   &.correct {
-    border: 1px solid var(--green-500)
+    border: 2px solid var(--green-500)
   }
   
   &.incorrect {
-    border: 1px solid var(--red-500)
+    border: 2px solid var(--red-500)
   }
 }

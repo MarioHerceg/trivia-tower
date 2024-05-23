@@ -1,71 +1,29 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { ApiService } from '../../services/api.service';
-import { AppState } from '../../state';
+import { ApiService } from '../services/api.service';
+import { AppState } from '.';
 import { from, switchMap, tap, withLatestFrom } from 'rxjs';
-import { TriviaActions, TriviaSelectors } from '../../state/trivia';
+import { TriviaActions, TriviaSelectors } from './trivia';
 import { tapResponse } from '@ngrx/operators';
-import { IResponseQuestion, IResponseQuestionCountsByCategory, QuestionDifficulty } from '../../models/trivia.model';
+import {
+  GetQuestionsType,
+  IGetQuestionCountsByCategoryPayload,
+  IGetQuestionsPayload,
+  IQuestion,
+  IQuestionCountsByCategory,
+  IResponseQuestion,
+  IResponseQuestionCountsByCategory,
+  QuestionDifficulty,
+  TriviaStep,
+} from '../models/trivia.model';
 import {
   IAsyncStatus,
   toAsyncInitStatus,
   toAsyncLoadedStatus,
   toAsyncLoadingStatus,
-} from '../../models/async-status.model';
+} from '../models/async-status.model';
 import { MessageService } from 'primeng/api';
-
-export interface IQuestion {
-  category: IResponseQuestion['category'];
-  correctAnswer: IResponseQuestion['correct_answer'];
-  incorrectAnswers: IResponseQuestion['incorrect_answers'];
-  question: IResponseQuestion['question'];
-  type: IResponseQuestion['type'];
-  difficulty: IResponseQuestion['difficulty'];
-}
-
-export interface IQuestionCountsByCategory {
-  categoryId: IResponseQuestionCountsByCategory['category_id'];
-  categoryQuestionCount: {
-    [QuestionDifficulty.ANY]: IResponseQuestionCountsByCategory['category_question_count']['total_easy_question_count'];
-    // eslint-disable-next-line max-len
-    [QuestionDifficulty.EASY]: IResponseQuestionCountsByCategory['category_question_count']['total_easy_question_count'];
-    // eslint-disable-next-line max-len
-    [QuestionDifficulty.MEDIUM]: IResponseQuestionCountsByCategory['category_question_count']['total_medium_question_count'];
-    // eslint-disable-next-line max-len
-    [QuestionDifficulty.HARD]: IResponseQuestionCountsByCategory['category_question_count']['total_hard_question_count'];
-  };
-}
-
-export interface IQuestionsRequest {
-  category: number;
-  type: IResponseQuestion['type'];
-  difficulty: IResponseQuestion['difficulty'];
-}
-
-export enum TriviaStep {
-  HOME = 'home',
-  QUIZ = 'quiz',
-}
-
-export enum QuizType {
-  CLASSIC = 'classic',
-  ENDLESS = 'endless',
-}
-
-export enum GetQuestionsType {
-  OVERWRITE = 'overwrite',
-  APPEND = 'append',
-}
-
-export interface IGetQuestionsPayload {
-  request: Partial<IQuestionsRequest>;
-  type: GetQuestionsType;
-}
-
-export type IGetQuestionCountsByCategoryPayload = Omit<IGetQuestionsPayload, 'request'> & {
-  request: Omit<IGetQuestionsPayload['request'], 'category'> & { category: number };
-};
 
 interface IGraphSchemaLocalState {
   questions: IQuestion[];
@@ -102,7 +60,6 @@ export class TriviaStore extends ComponentStore<IGraphSchemaLocalState> {
             (response) => {
               if (response.response_code === 0) {
                 const questions = responseQuestionsToQuestions(response.results);
-                console.log(questions);
                 this.getQuestionSuccess({ questions, type: payload.type });
                 if (payload.type === GetQuestionsType.OVERWRITE) {
                   this.updateStep(TriviaStep.QUIZ);
@@ -122,8 +79,14 @@ export class TriviaStore extends ComponentStore<IGraphSchemaLocalState> {
                 }, 5000);
               }
             },
-            (error: Error) => {
+            (error: any) => {
               console.error(error);
+              if (error.error.response_code === 5) {
+                this.messageService.add({
+                  severity: 'error',
+                  detail: 'Too many requests have occurred. You can only get questions once every 5 seconds.',
+                });
+              }
             },
           ),
         ),
