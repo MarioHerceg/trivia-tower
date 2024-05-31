@@ -1,27 +1,51 @@
-# TriviaTower
+# Trivia Tower
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+Welcome to my Angular Trivia Tower project! This repository contains a small application built with Angular, designed to demonstrate my frontend development skills and commitment to code quality. The project is also deployed on GitHub Pages, allowing you to see it in action.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Code Quality](#code-quality)
+- [Usage](#usage)
+- [Deployment](#deployment)
 
-## Code scaffolding
+## Project Overview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This project is a simple Angular application that serves as a showcase for my frontend development skills. It includes various features and adheres to best practices in code quality, Angular best practices, linting and type safety with TypeScript.
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Responsive Design:** The application is fully responsive and works on various screen sizes.
+- **Routing:** Implements Angular's routing module for navigation.
+- **State Management:** Utilizes Angular services for state management.
+- **API Integration:** Demonstrates fetching and displaying data from a public API.
+- **Form Handling:** Includes a feature for handling forms.
 
-## Running unit tests
+## Technologies Used
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Angular:** The primary framework for building the application.
+- **TypeScript:** Ensures type safety and improves code quality.
+- **HTML & SCSS:** For markup and styling.
+- **Angular CLI:** For scaffolding and development tools.
 
-## Running end-to-end tests
+## Code Quality
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This project adheres to best practices in code quality:
 
-## Further help
+- **Linting:** Using ESLint to maintain consistent code style.
+- **Prettier:** For automatic code formatting.
+- **Type Safety:** Strict TypeScript configurations to avoid runtime errors.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+
+To start the development server, run:
+```sh
+npm run start
+```
+Open your browser and navigate to `http://localhost:4200` to see the application running.
+
+## Deployment
+
+The project is deployed on GitHub Pages. You can view the live version [here](https://marioherceg.github.io/trivia-tower).
